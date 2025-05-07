@@ -14,6 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
         $id = $_GET['id'];
 
         try {
+            // check user role
+            $check_role = $conn->prepare("SELECT role FROM users WHERE id = ?");
+            $check_role->execute([$id]); 
+
+            if ($check_role->fetch(PDO::FETCH_ASSOC) === 2) {
+                echo json_encode([
+                    "success" => false,
+                    "message" => "Can't delete main user. Contact to your service provider."
+                ]);
+                exit;
+            }
+
             // Prepare the DELETE query
             $deleteQuery = $conn->prepare("DELETE FROM users WHERE id = ?");
             $deleteQuery->execute([$id]);

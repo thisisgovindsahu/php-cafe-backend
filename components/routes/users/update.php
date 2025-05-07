@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $userid = filter_var($_GET['userid'], FILTER_SANITIZE_STRING);
     $id = filter_var($data['aid']);
-    $role = filter_var($data['role']);
+    $role = 1;
 
     try {
         $check_role = $conn->prepare("SELECT role FROM users WHERE id = ?");

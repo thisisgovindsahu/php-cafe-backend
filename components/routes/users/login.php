@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                          "name" => $user['name'],
                          "phone" => $user['phone']
                      ]));
-                     $cookie_expiry = time() + (86400 * 7); // Cookie valid for 7 days
+                     $cookie_expiry = time() + (86400 * 364); // Cookie valid for 364 days
  
                      setcookie($cookie_name, $cookie_value, $cookie_expiry, "/", "", false, true);
                     

@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image->execute([$productid]);
     $image_name = $image->fetch(PDO::FETCH_ASSOC)['image'];
     $pre_image_path = __DIR__ . "/../../../uploaded_files/" . $image_name;
+    // echo $pre_image_path;
     unlink($pre_image_path);
     }
     // Handle the optional image upload

@@ -12,6 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     if (isset($_GET['productid'])) {
         $id = $_GET['productid'];
 
+        // delete product image from image folder
+        $product_image = "SELECT image FROM products WHERE id = ?";
+        $image = $conn->prepare($product_image);
+        $image->execute([$id]);
+        $image_name = $image->fetch(PDO::FETCH_ASSOC)['image'];
+        $product_image_path = __DIR__ . "/../../../uploaded_files/" . $image_name;
+        unlink($product_image_path);      
+
         try {
             // Prepare the DELETE query
             $deleteQuery = $conn->prepare("DELETE FROM products WHERE id = ?");
